@@ -13,8 +13,6 @@ public class RegStart implements Command {
         sendMessage.setChatId(message.getChatId());
         sendMessage.setText("Чтобы зарегистрироваться, введите пожалуйста некоторую информацию.\nВведите имя:");
 
-        user.setState(new RegEnterPhone());
-
         return sendMessage;
     }
 }

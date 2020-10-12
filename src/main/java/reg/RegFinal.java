@@ -13,8 +13,6 @@ public class RegFinal implements Command {
         sendMessage.setChatId(message.getChatId());
         sendMessage.setText("Вы успешно зарегистрировались!");
 
-        user.setState(new NormalState());
-
         return sendMessage;
     }
 }

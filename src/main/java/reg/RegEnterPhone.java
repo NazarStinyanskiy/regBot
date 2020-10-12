@@ -12,8 +12,6 @@ public class RegEnterPhone implements Command {
         sendMessage.setChatId(message.getChatId());
         sendMessage.setText("Введите номер телефона:");
 
-        user.setState(new RegFinal());
-
         return sendMessage;
     }
 }

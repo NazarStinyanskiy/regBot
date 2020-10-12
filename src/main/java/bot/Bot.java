@@ -8,7 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import reg.RegEnterPhone;
+import reg.RegFinal;
 import reg.RegStart;
+import users.NormalState;
 import users.User;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.List;
 public class Bot extends TelegramLongPollingBot {
     private static final String botName = "MyPuperSuperTestBot";
     private static final String token = "925986929:AAG57828XZ-Q2uztEdtcd8GcCbnIeQzWvY8";
-    private static List<User> users = new ArrayList<>();
+    private static final List<User> users = new ArrayList<>();
 
     public static void main(String[] args) {
         ApiContextInitializer.init();
@@ -64,21 +67,17 @@ public class Bot extends TelegramLongPollingBot {
             currentUser = users.get(users.size() - 1);
         }
 
-        switch (message.getText()){
-            case "/help":
-                currentUser.setState(new Help());
-                sendMessage(message, currentUser);
-                break;
-            case "/reg":
-                currentUser.setState(new RegStart());
-                sendMessage(message, currentUser);
-                break;
-            default:
-                sendMessage(message, currentUser);
-        }
+        if(currentUser.getState() instanceof RegFinal) currentUser.setState(new NormalState());
+        if(currentUser.getState() instanceof RegEnterPhone) currentUser.setState(new RegFinal());
+        if(currentUser.getState() instanceof RegStart) currentUser.setState(new RegEnterPhone());
+        if(message.getText().equals("/help")) currentUser.setState(new Help());
+        if(message.getText().equals("/reg")) currentUser.setState(new RegStart());
+
+        System.out.println(currentUser.getState());
+        currentUser.setCurrentMessage(message);
+
+        sendMessage(message, currentUser);
     }
-
-
 
     public String getBotUsername() {
         return botName;
