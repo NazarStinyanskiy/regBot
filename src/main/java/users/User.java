@@ -24,19 +24,18 @@ public class User {
 
     public void setState(Command state) {
         this.state = state;
-
     }
 
     public long getId() {
         return id;
     }
 
-    private void setNameInfo() {
+    public void setNameInfo() {
         this.nameInfo = currentMessage.getText();
         System.out.println(nameInfo);
     }
 
-    private void setPhoneInfo() {
+    public void setPhoneInfo() {
         this.phoneInfo = currentMessage.getText();
         System.out.println(phoneInfo);
     }
