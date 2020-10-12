@@ -49,10 +49,17 @@ public class Bot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
-        boolean newUser = false;
-        User currentUser = null;
 
         if (message == null || !message.hasText()) return;
+
+        User currentUser = userSettings(message);
+
+        sendMessage(message, currentUser);
+    }
+
+    private User userSettings(Message message){
+        boolean newUser = false;
+        User currentUser = null;
 
         for (User user : users) {
             if(user.getId() == message.getChatId()){
@@ -76,7 +83,7 @@ public class Bot extends TelegramLongPollingBot {
         System.out.println(currentUser.getState());
         currentUser.setCurrentMessage(message);
 
-        sendMessage(message, currentUser);
+        return currentUser;
     }
 
     public String getBotUsername() {
