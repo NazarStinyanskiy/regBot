@@ -38,12 +38,20 @@ public class User {
         this.phoneInfo = currentMessage.getText();
     }
 
-    public void writeData(){
+    public boolean writeData(){
+        String regex = "\\+?(38)?[\\s-]*\\d{3}[\\s-]*\\d{3}[\\s-]*\\d{4}";
+
+        if(!phoneInfo.trim().matches(regex)){
+            return false;
+        }
+
         try(Writer writer = new FileWriter("src/main/resources/data.txt", true)) {
             writer.append("Name: ").append(nameInfo).append(", ").append("Phone: ").append(phoneInfo).append(";\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return true;
     }
 
     public void setCurrentMessage(Message currentMessage) {

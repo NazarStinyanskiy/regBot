@@ -1,2 +1,6 @@
-Name: Nazar Phone: asdf;
-Name: Bahdan Phone: asdf;lkj;
+Name: asdf, Phone: 0637499898;
+Name: asdf, Phone: +38 063 749 9898;
+Name: +380637499898, Phone: +380637499898;
+Name: nazar, Phone: 063 7499898;
+Name: jj, Phone: 380637499898;
+Name: adsf, Phone: +38 063  749 9898;

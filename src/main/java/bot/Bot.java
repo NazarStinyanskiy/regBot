@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import reg.RegEnterPhone;
+import reg.RegEnterPhoneError;
 import reg.RegFinal;
 import reg.RegStart;
 import users.NormalState;
@@ -78,10 +79,13 @@ public class Bot extends TelegramLongPollingBot {
 
         if(currentUser.getState() instanceof RegFinal) currentUser.setState(new NormalState());
 
-        if(currentUser.getState() instanceof RegEnterPhone) {
-            currentUser.setState(new RegFinal());
+        if(currentUser.getState() instanceof RegEnterPhone || currentUser.getState() instanceof RegEnterPhoneError) {
             currentUser.setPhoneInfo();
-            currentUser.writeData();
+            if (currentUser.writeData()) {
+                currentUser.setState(new RegFinal());
+            } else {
+                currentUser.setState(new RegEnterPhoneError());
+            }
         }
 
         if(currentUser.getState() instanceof RegStart) {
