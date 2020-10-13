@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Bot extends TelegramLongPollingBot {
     private static final String botName = "MyPuperSuperTestBot";
-    private static final String token = "925986929:AAG57828XZ-Q2uztEdtcd8GcCbnIeQzWvY8";
+    private static final String token = "<token>";
     private static final List<User> users = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -45,9 +45,6 @@ public class Bot extends TelegramLongPollingBot {
 
         return false;
     }
-
-    // написати тут метод write();
-    // зробити для кожного стану реєстрації свій клас і реалізувати в них команд.
 
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
