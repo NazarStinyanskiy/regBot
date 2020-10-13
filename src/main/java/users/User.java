@@ -2,9 +2,9 @@ package users;
 
 import bot.Command;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import reg.RegEnterPhone;
-import reg.RegFinal;
-import reg.RegStart;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 public class User {
     private final long id;
@@ -32,12 +32,18 @@ public class User {
 
     public void setNameInfo() {
         this.nameInfo = currentMessage.getText();
-        System.out.println(nameInfo);
     }
 
     public void setPhoneInfo() {
         this.phoneInfo = currentMessage.getText();
-        System.out.println(phoneInfo);
+    }
+
+    public void writeData(){
+        try(Writer writer = new FileWriter("src/main/resources/data.txt", true)) {
+            writer.append("Name: ").append(nameInfo).append(", ").append("Phone: ").append(phoneInfo).append(";\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCurrentMessage(Message currentMessage) {

@@ -81,6 +81,7 @@ public class Bot extends TelegramLongPollingBot {
         if(currentUser.getState() instanceof RegEnterPhone) {
             currentUser.setState(new RegFinal());
             currentUser.setPhoneInfo();
+            currentUser.writeData();
         }
 
         if(currentUser.getState() instanceof RegStart) {
