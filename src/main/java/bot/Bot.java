@@ -12,6 +12,7 @@ import reg.RegEnterPhone;
 import reg.RegEnterPhoneError;
 import reg.RegFinal;
 import reg.RegStart;
+import start.Start;
 import users.NormalState;
 import users.User;
 
@@ -92,6 +93,8 @@ public class Bot extends TelegramLongPollingBot {
             currentUser.setState(new RegEnterPhone());
             currentUser.setNameInfo();
         }
+
+        if(message.getText().equals("/start")) currentUser.setState(new Start());
 
         if(message.getText().equals("/help")) currentUser.setState(new Help());
 
